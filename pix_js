@@ -1,0 +1,31 @@
+// Select color input
+
+// Select size input
+
+// When size is submitted by the user, call makeGrid()
+$("document").ready(function() {
+  let down = false;
+  $("#sizePicker").submit(function makeGrid(event) {
+    event.preventDefault();
+    $("table tr").remove();
+    var height = $("#inputHeight").val();
+    var width = $("#inputWeight").val();
+    for (var a = 1; a <= height; a++) {
+      $("table").append("<tr></tr>");
+      for (var b = 1; b <= width; b++) {
+        $("tr:last-child").append("<td></td>");
+        $("table").on("click", "tr td", function() {
+          $(this).css("background-color", $("#colorPicker").val());
+          down = true;
+        });
+        $("table").on("mouseup", "tr td", function() {
+          down = false;
+          $(this).css("background-color", $("#colorPicker").val());
+        });
+        $("table").on("mouseover", "tr td", function() {
+          if (down) $(this).css("background-color", $("#colorPicker").val());
+        });
+      }
+    }
+  });
+});
